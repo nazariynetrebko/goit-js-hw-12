@@ -9,7 +9,7 @@
   margin: 20px auto;
 }
 
-.loader.hidden {
+/* .loader {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -21,6 +21,10 @@
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+} */
+
+.loader.hidden {
+  display: none !important; /* Переконайтеся, що цей клас є */
 }
 
 .loader:before {

@@ -4,8 +4,8 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 let lightbox;
 
 export function renderGallery(images, gallery) {
-  const markup = images.map(createImageCard).join(``);
-  gallery.insertAdjacentHTML(`beforeend`, markup);
+  const markup = images.map(createImageCard).join('');
+  gallery.insertAdjacentHTML('beforeend', markup);
   initLightbox();
 }
 
@@ -34,12 +34,9 @@ function createImageCard({
 }
 
 function initLightbox() {
-  if (lightbox) {
-    lightbox.refresh();
-  } else {
-    lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
-  }
+  lightbox?.refresh();
+  lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 }

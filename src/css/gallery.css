@@ -50,3 +50,32 @@
   margin-bottom: 5px;
   color: #2a2a2a;
 }
+
+.load-more-wrapper {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+.load-more {
+  padding: 12px 24px;
+  background: #4e75ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-more:hover {
+  background: #6c8cff;
+}
+
+.end-message {
+  color: #2a2a2a;
+  font-size: 16px;
+  font-weight: 500;
+}
