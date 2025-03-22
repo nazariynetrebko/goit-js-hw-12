@@ -9,6 +9,11 @@ export function renderGallery(images, gallery) {
   initLightbox();
 }
 
+setTimeout(() => {
+  const items = gallery.querySelectorAll('.gallery-item');
+  items.forEach(item => item.classList.add('visible'));
+}, 50);
+
 function createImageCard({
   webformatURL,
   largeImageURL,

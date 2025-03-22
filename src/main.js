@@ -13,6 +13,14 @@ let currentPage = 1;
 let currentQuery = '';
 const perPage = 15;
 
+window.addEventListener('load', () => {
+  loader.style.display = 'none';
+});
+
+function loaderToggle(isLoading) {
+  loader.style.display = isLoading ? 'block' : 'none';
+}
+
 form.addEventListener('submit', async event => {
   event.preventDefault();
   const inputField = event.target.elements['search-text'];
@@ -27,7 +35,7 @@ form.addEventListener('submit', async event => {
   currentQuery = query;
 
   try {
-    loaderToggle();
+    loaderToggle(true);
     const { images, totalHits } = await fetchImages(currentQuery, currentPage);
 
     if (!images.length) {
@@ -35,30 +43,40 @@ form.addEventListener('submit', async event => {
       return;
     }
 
-    renderGallery(images, gallery);
-    handlePagination(totalHits);
+    // Додаємо затримку перед рендерингом
+    setTimeout(() => {
+      renderGallery(images, gallery);
+      handlePagination(totalHits);
+    }, 500);
   } catch (error) {
     showError(error.message);
   } finally {
-    loaderToggle();
-    inputField.value = '';
+    setTimeout(() => {
+      loaderToggle(false);
+      inputField.value = '';
+    }, 500);
   }
 });
 
 loadMoreBtn.addEventListener('click', async () => {
   currentPage++;
   loadMoreBtn.classList.add('hidden');
-  loaderToggle();
+  loaderToggle(true);
 
   try {
     const { images, totalHits } = await fetchImages(currentQuery, currentPage);
-    renderGallery(images, gallery);
-    smoothScroll();
-    handlePagination(totalHits);
+
+    setTimeout(() => {
+      renderGallery(images, gallery);
+      smoothScroll();
+      handlePagination(totalHits);
+    }, 500);
   } catch (error) {
     showError(error.message);
   } finally {
-    loaderToggle();
+    setTimeout(() => {
+      loaderToggle(false);
+    }, 500);
   }
 });
 
@@ -87,10 +105,6 @@ function smoothScroll() {
       behavior: 'smooth',
     });
   }
-}
-
-function loaderToggle() {
-  loader.classList.toggle('hidden');
 }
 
 function showWarning(message) {
