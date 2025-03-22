@@ -43,7 +43,7 @@ form.addEventListener('submit', async event => {
       return;
     }
 
-    // Додаємо затримку перед рендерингом
+    // Затримку додано для корректного відображення лоадера
     setTimeout(() => {
       renderGallery(images, gallery);
       handlePagination(totalHits);
