@@ -43,18 +43,13 @@ form.addEventListener('submit', async event => {
       return;
     }
 
-    // Затримку додано для корректного відображення лоадера
-    setTimeout(() => {
-      renderGallery(images, gallery);
-      handlePagination(totalHits);
-    }, 500);
+    renderGallery(images, gallery);
+    handlePagination(totalHits);
   } catch (error) {
     showError(error.message);
   } finally {
-    setTimeout(() => {
-      loaderToggle(false);
-      inputField.value = '';
-    }, 500);
+    loaderToggle(false);
+    inputField.value = '';
   }
 });
 
