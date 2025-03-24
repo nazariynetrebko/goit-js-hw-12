@@ -3,8 +3,10 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 let lightbox;
 
-export function renderGallery(images, gallery) {
-  gallery.innerHTML = '';
+export function renderGallery(images, gallery, append = false) {
+  if (!append) {
+    gallery.innerHTML = '';
+  }
   const markup = images.map(createImageCard).join('');
   gallery.insertAdjacentHTML('beforeend', markup);
   initLightbox();
@@ -40,9 +42,12 @@ function createImageCard({
 }
 
 function initLightbox() {
-  lightbox?.refresh();
-  lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+    });
+  } else {
+    lightbox.refresh();
+  }
 }

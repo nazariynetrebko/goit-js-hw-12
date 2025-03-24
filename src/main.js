@@ -62,7 +62,7 @@ loadMoreBtn.addEventListener('click', async () => {
     const { images, totalHits } = await fetchImages(currentQuery, currentPage);
 
     setTimeout(() => {
-      renderGallery(images, gallery);
+      renderGallery(images, gallery, true);
       smoothScroll();
       handlePagination(totalHits);
     }, 500);
@@ -92,12 +92,10 @@ function handlePagination(totalHits) {
 }
 
 function smoothScroll() {
-  const galleryItem = gallery.firstElementChild;
-  if (galleryItem) {
-    const { height } = galleryItem.getBoundingClientRect();
-    window.scrollBy({
-      top: height * 2,
+  if (gallery.lastElementChild) {
+    gallery.lastElementChild.scrollIntoView({
       behavior: 'smooth',
+      block: 'start',
     });
   }
 }
